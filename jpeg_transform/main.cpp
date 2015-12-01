@@ -12,6 +12,8 @@ void main(int argc, char **argv) {
 
 	ifstream ifs("dataset.txt");
 	ifstream ifs_qua("matrice_in\\qua_table1.txt");
+	//ofstream ofs("dataset_out.txt");
+
 	double matrix[8][8];
 	double qua_table[8][8];
 
@@ -24,6 +26,7 @@ void main(int argc, char **argv) {
 	matrix_print(cout, matrix);
 	quantize(matrix, qua_table);
 	matrix_print(cout, matrix);
+	matrix_print(ofs, matrix);
 	
 	system("pause");
 }

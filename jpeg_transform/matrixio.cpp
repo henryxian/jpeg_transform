@@ -11,8 +11,8 @@ void input_matrix(ifstream &ifs, matrix mat) {
 		istringstream is(s);
 		//cout << s << endl;
 		while (is >> temp){
-			mat[i][j++] = hexstr_to_int(temp);
-			//mat[i][j++] = atoi(temp.c_str());
+			//mat[i][j++] = hexstr_to_int(temp);
+			mat[i][j++] = atoi(temp.c_str());
 		}
 		j = 0;
 		i++;
@@ -70,6 +70,6 @@ void matrix_print(ostream &os, matrix mat) {
 		{
 			os << mat[idx][idy] << " ";
 		}
-		cout << endl;
+		os << "\n";
 	}
 }

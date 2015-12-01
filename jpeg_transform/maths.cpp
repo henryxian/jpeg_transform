@@ -77,7 +77,7 @@ void quantize(matrix data_mat, matrix qua_table) {
 		for (size_t j = 0; j < 8; j++)
 		{
 			data_mat[i][j] /= qua_table[i][j];
-			data_mat[i][j] = (int)data_mat[i][j];
+			data_mat[i][j] = round(data_mat[i][j]);
 		}
 	}
 }
