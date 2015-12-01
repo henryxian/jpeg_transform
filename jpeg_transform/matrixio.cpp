@@ -1,4 +1,5 @@
 #include "matrixio.h"
+#include "maths.h"
 
 using namespace std;
 
@@ -11,8 +12,8 @@ void input_matrix(ifstream &ifs, matrix mat) {
 		istringstream is(s);
 		//cout << s << endl;
 		while (is >> temp){
-			//mat[i][j++] = hexstr_to_int(temp);
-			mat[i][j++] = atoi(temp.c_str());
+			mat[i][j++] = hexstr_to_int(temp);
+			//mat[i][j++] = atoi(temp.c_str());
 		}
 		j = 0;
 		i++;
@@ -49,6 +50,7 @@ void output_matrix(ofstream &ofs, matrix mat) {
 //	system("pause");
 //}
 
+// change the hex string into integer
 int hexstr_to_int(const string &s){
 	unsigned int offset = 16;
 	int result = 0;
@@ -64,6 +66,7 @@ int hexstr_to_int(const string &s){
 	return result;
 }
 
+// print matrix
 void matrix_print(ostream &os, matrix mat) {
 	for (size_t idx = 0; idx < 8; idx++) {
 		for (size_t idy = 0; idy < 8; idy++)
@@ -72,4 +75,21 @@ void matrix_print(ostream &os, matrix mat) {
 		}
 		os << "\n";
 	}
+}
+
+void print_result(ostream& os, matrix mat, matrix qua_table) {
+	os << "-------------- 原始矩阵 --------------" << "\n";
+	matrix_print(os, mat);
+	os << "------------- 经过DCT之后的矩阵 ------" << "\n";
+	DCT(mat);
+	matrix_print(os, mat);
+	os << "------------- 量化后的矩阵 ----------" << "\n";
+	quantize(mat, qua_table);
+	matrix_print(os, mat);
+	os << "------------- 逆量化后的矩阵 ----------" << "\n";
+	dequantize(mat, qua_table);
+	matrix_print(os, mat);
+	os << "------------- ICDT后的矩阵 ------------" << "\n";
+	IDCT(mat);
+	matrix_print(os, mat);
 }

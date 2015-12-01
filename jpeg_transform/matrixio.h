@@ -21,4 +21,6 @@ int hexstr_to_int(const string &);
 
 void matrix_print(ostream &, matrix);
 
+void print_result(ostream &, matrix, matrix);
+
 #endif
