@@ -2,6 +2,7 @@
 #include "matrixio.h"
 #include <vector>
 
+//#define DBG
 
 void main(int argc, char **argv) {
 	//string temp;
@@ -19,7 +20,7 @@ void main(int argc, char **argv) {
 	double matrix[8][8];
 	double qua_table[8][8];
 	input_matrix(ifs_qua, qua_table);
-
+#ifndef DBG
 	vector<string> vec{data_in1, data_in2, data_in3, data_in4};
 	for (const auto &s : vec) {
 		ifstream ifs(dir_in + s);
@@ -27,7 +28,7 @@ void main(int argc, char **argv) {
 		ofstream ofs(dir_out + s);
 		print_result(ofs, matrix, qua_table);
 	}
-
+#endif
 	//cout << "-------------- 原始矩阵 --------------" << endl;
 	//matrix_print(cout, matrix);
 	//cout << "------------- 经过DCT之后的矩阵 ------" << endl;
@@ -48,6 +49,10 @@ void main(int argc, char **argv) {
 	//matrix_print(cout, matrix);
 	//IDCT(matrix);
 	//matrix_print(cout, matrix);
-
+#ifdef DBG
+	ifstream test_data("dataset.txt");
+	input_matrix(test_data, matrix);
+	print_result(cout, matrix, qua_table);
+#endif
 	system("pause");
 }

@@ -1,6 +1,8 @@
 #include "matrixio.h"
 #include "maths.h"
 
+//#define DBG
+
 using namespace std;
 
 void input_matrix(ifstream &ifs, matrix mat) {
@@ -12,8 +14,11 @@ void input_matrix(ifstream &ifs, matrix mat) {
 		istringstream is(s);
 		//cout << s << endl;
 		while (is >> temp){
+#ifndef DBG
 			mat[i][j++] = hexstr_to_int(temp);
-			//mat[i][j++] = atoi(temp.c_str());
+#else
+			mat[i][j++] = atoi(temp.c_str());
+#endif
 		}
 		j = 0;
 		i++;
