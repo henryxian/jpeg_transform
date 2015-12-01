@@ -20,13 +20,26 @@ void main(int argc, char **argv) {
 	input_matrix(ifs, matrix);
 	input_matrix(ifs_qua, qua_table);
 
-	DCT(matrix);
-	ofstream ofs("output.txt");
-	//output_matrix(ofs, matrix);
+	cout << "-------------- 原始矩阵 --------------" << endl;
 	matrix_print(cout, matrix);
+	cout << "------------- 经过DCT之后的矩阵 ------" << endl;
+	DCT(matrix);
+	matrix_print(cout, matrix);
+	cout << "------------- 量化后的矩阵 ----------" << endl;
 	quantize(matrix, qua_table);
 	matrix_print(cout, matrix);
-	matrix_print(ofs, matrix);
-	
+	cout << "------------- 逆量化后的矩阵 ----------" << endl;
+	dequantize(matrix, qua_table);
+	matrix_print(cout, matrix);
+	cout << "------------- ICDT后的矩阵 ------------" << endl;
+	IDCT(matrix);
+	matrix_print(cout, matrix);
+
+	//matrix_print(cout, matrix);
+	//DCT(matrix);
+	//matrix_print(cout, matrix);
+	//IDCT(matrix);
+	//matrix_print(cout, matrix);
+
 	system("pause");
 }

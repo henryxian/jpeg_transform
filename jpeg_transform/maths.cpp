@@ -71,6 +71,26 @@ void DCT(double mat[8][8]) {
 	//}
 }
 
+void IDCT(double mat[8][8]) {
+	double quotient[8][8];
+	double quotientT[8][8];
+	double temp[8][8];
+
+	coefficient(quotient);
+	matrix_transpose(quotient, quotientT);
+
+	matrix_multiply(quotientT, mat, temp);
+	matrix_multiply(temp, quotient, mat);
+
+	for (size_t i = 0; i < 8; i++)
+	{
+		for (size_t j = 0; j < 8; j++)
+		{
+			mat[i][j] += 128;
+		}
+	}
+}
+
 void quantize(matrix data_mat, matrix qua_table) {
 	for (size_t i = 0; i < 8; i++)
 	{
@@ -81,3 +101,15 @@ void quantize(matrix data_mat, matrix qua_table) {
 		}
 	}
 }
+
+void dequantize(matrix mat, matrix qua_table) {
+	for (size_t i = 0; i < 8; i++)
+	{
+		for (size_t j = 0; j < 8; j++)
+		{
+			mat[i][j] *= qua_table[i][j];
+		}
+	}
+}
+
+
